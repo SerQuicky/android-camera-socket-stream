@@ -27,7 +27,6 @@ import androidx.core.app.ActivityCompat;
 
 public class CameraHandler {
 
-    private static final String TAG = "AndroidCameraApi";
     protected Context context;
     protected Activity activity;
     protected CaptureRequest.Builder captureRequestBuilder;
@@ -46,13 +45,15 @@ public class CameraHandler {
 
     public void openCamera() {
         CameraManager manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
-        Log.e(TAG, "is camera open");
+        Log.e(StateSingleton.getInstance().TAG, "Camera was opened!");
         try {
+            // Configure the camera stream
             cameraId = manager.getCameraIdList()[0];
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
             StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
             assert map != null;
             imageDimension = map.getOutputSizes(SurfaceTexture.class)[0];
+
             // Add permission for camera and let user grant the permission
             if (ActivityCompat.checkSelfPermission(this.activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this.activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this.activity, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 200);
@@ -62,14 +63,13 @@ public class CameraHandler {
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
-        Log.e(TAG, "openCamera X");
     }
 
     private final CameraDevice.StateCallback stateCallback = new CameraDevice.StateCallback() {
         @Override
         public void onOpened(CameraDevice camera) {
             //This is called when the camera is open
-            Log.e(TAG, "onOpened");
+            Log.e(StateSingleton.getInstance().TAG, "On camera callback was called, so the preview can be shown.");
             cameraDevice = camera;
             createCameraPreview();
         }
@@ -118,7 +118,7 @@ public class CameraHandler {
 
     protected void updatePreview() {
         if (null == cameraDevice) {
-            Log.e(TAG, "updatePreview error, return");
+            Log.e(StateSingleton.getInstance().TAG, "Update camera preview ran on an error!");
         }
         captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
         try {
