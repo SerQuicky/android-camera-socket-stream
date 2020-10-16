@@ -10,6 +10,7 @@ public class CustomSurfaceListener implements TextureView.SurfaceTextureListener
     protected SocketStream socketStream;
     protected TextureView textureView;
     protected boolean wait = false;
+    protected int interval = 1000;
 
     public CustomSurfaceListener(CameraHandler cameraHandler, TextureView textureView) {
         this.cameraHandler = cameraHandler;
@@ -44,7 +45,7 @@ public class CustomSurfaceListener implements TextureView.SurfaceTextureListener
                 public void run() {
                     StateSingleton.getInstance().waitInterval = false;
                 }
-            }, 1000);
+            }, interval);
         }
     }
 }

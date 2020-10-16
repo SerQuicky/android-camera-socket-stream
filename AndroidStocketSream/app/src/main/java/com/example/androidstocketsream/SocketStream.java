@@ -6,6 +6,10 @@ import com.github.nkzawa.socketio.client.Socket;
 
 public class SocketStream {
 
+    /*
+        Handles the communication with the REST-Socket
+     */
+
     private Socket mSocket;
     private String url = "http://192.168.2.103:5000";
 
@@ -26,7 +30,6 @@ public class SocketStream {
         }
     }
 
-    // @TODO: Remove it later (was for the base64 testing)
     public void attemptSend2(String message) {
         try {
             mSocket.emit("transfer", message);
