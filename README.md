@@ -1,7 +1,7 @@
 # android-camera-socket-stream
 An example application of a video socket connection between an android device and a REST-Service with socket.io.
 
-![screenshot](https://github.com/SerQuicky/android-camera-socket-stream/blob/master/resources/screenshot.png)
+![screenshot](https://github.com/SerQuicky/android-camera-socket-stream/blob/master/resources/screenshot_new.png)
 
 ## How does it work?
 
