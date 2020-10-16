@@ -11,7 +11,7 @@ public class SocketStream {
      */
 
     private Socket mSocket;
-    private String url = "http://192.168.2.103:5000";
+    private String url = "";
 
     SocketStream() {
         try {

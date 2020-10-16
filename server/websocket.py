@@ -12,10 +12,6 @@ socketio = SocketIO(app, cors_allowed_origins='*')
 def handleImage(msg):
 	print(type(msg))
 
-	# This was only for a base64 decoding test
-	# with open("Output.txt", "w") as text_file:
-    #		text_file.write(msg)
-
 
 if __name__ == '__main__':
 	socketio.run(app, host='0.0.0.0', port=5000)
